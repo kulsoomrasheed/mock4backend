@@ -44,12 +44,12 @@ if (user){
             res.json({msg:"Login Successful!!!", token})
 
         }else{
-            res.json({msg:"Invalid Credentials"})
+            res.status(400).json({msg:"Invalid Credentials"})
 
         }
     })
 }else{
-    res.json({msg:"User does not exist"})
+    res.status(400).json({msg:"User does not exist"})
 
 }
     }catch(err){
