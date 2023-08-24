@@ -5,6 +5,8 @@ const auth = (req, res, next) => {
         try {
             const decoded = jwt.verify(token, process.env.secret);
             if (decoded) {
+                console.log(decoded.username);
+                req.body.username=decoded.username;
                 next();
             } else {
                 res.status(401).send("Not authorized"); 

@@ -8,25 +8,18 @@ userRouter.get("/",(req,res)=>{
     res.json({msg:"success"})
 })
 userRouter.post("/register",(req,res)=>{
-    const {email,pass,confirmPass}= req.body
+    const {email,pass,username}= req.body
    try{
-    if (pass===confirmPass){
- bcrypt.hash(confirmPass,5,async(err,hash)=>{
+    
+ bcrypt.hash(pass,5,async(err,hash)=>{
         if (err){
             res.json({err})
         }else{
-            const user= new UserModel({email,pass:hash,confirmPass:hash})
+            const user= new UserModel({email,pass:hash,username})
             await user.save()
         }
     }) 
-       res.json({msg:"User has been registered!!!"})
-
-    }else{
-       res.send("Password and Confirm Password does not match")
-    }
    
-
-
    }catch{
     res.json({err:err.message})
 
@@ -40,7 +33,7 @@ userRouter.post("/login",async(req,res)=>{
 if (user){
     bcrypt.compare(pass,user.pass,(err,result)=>{
         if (result){
-            let token = jwt.sign({course:"BE"},process.env.secret)
+            let token = jwt.sign({username:user.username},process.env.secret)
             res.json({msg:"Login Successful!!!", token})
 
         }else{

@@ -2,7 +2,7 @@ const mongoose= require('mongoose')
 const userSchema=mongoose.Schema({
     email:String,
     pass:String,
-    confirmPass:String,
+    username:String,
 
 },{
     versionKey:false}
@@ -10,19 +10,18 @@ const userSchema=mongoose.Schema({
     const UserModel=mongoose.model('User',userSchema)
 
 
-    const docSchema=mongoose.Schema({
-        name:String,
-        image:String,
-        specialization:String,
-        fee:Number,
-        experience:Number,
+    const blogPostSchema=mongoose.Schema({
+        content:String,
+        title:String,
+        content:String,
+        likes:Number,
         date : String,
-        location:String,
-        slots:Number
+        category:String,
+        comments:[{ username: String, content: String }]
     },{
         versionKey:false}
         )
-        const DocModel=mongoose.model('Doctor',docSchema)
+        const BlogPostModel=mongoose.model('Blogs',blogPostSchema)
         module.exports={
-            UserModel,DocModel
+            UserModel,BlogPostModel
         }

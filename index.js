@@ -5,21 +5,21 @@ app.use(cors())
 require('dotenv').config()
 const { connection } = require('./db')
 const { userRouter } = require('./routes/user.routes')
-const {  docRouter } = require('./routes/employee.routes')
+const {  blogPostRouter } = require('./routes/blog.routes')
 
 
 app.get("/",(req,res)=>{
     res.json({msg:"success"})
 })
 app.use(express.json())
-app.use("/users",userRouter)
-app.use("/appointments",docRouter)
+app.use("/api",userRouter)
+app.use("/api/blogs",blogPostRouter)
 app.listen(process.env.port,async()=>{
     try{
         await connection
         console.log(`listening on port ${process.env.port}`);
 
     }catch(e){
-
+console.log(e);
     }
 })
