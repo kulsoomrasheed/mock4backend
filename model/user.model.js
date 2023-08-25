@@ -1,6 +1,6 @@
 const mongoose= require('mongoose')
 const userSchema=mongoose.Schema({
-    email:String,
+    email:{type:String,unique:true},
     pass:String,
     username:String,
 
@@ -11,6 +11,7 @@ const userSchema=mongoose.Schema({
 
 
     const blogPostSchema=mongoose.Schema({
+        username:String,
         content:String,
         title:String,
         content:String,

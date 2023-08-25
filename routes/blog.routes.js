@@ -15,11 +15,11 @@ blogPostRouter.get("/",async(req,res)=>{
 })
 
 blogPostRouter.post("/",async(req,res)=>{
-    const username=req.body
-    console.log(username)
+    const user=req.body.user
+    console.log(user)
     const { title,content,comments,likes,date,category}= req.body
     try{
-    const employee= new BlogPostModel({ username,title,comments,likes,date,content,category})
+    const employee= new BlogPostModel({ user,title,comments,likes,date,content,category})
     await employee.save()
     res.json({msg:"A new doctor has been added"})
     }catch{
